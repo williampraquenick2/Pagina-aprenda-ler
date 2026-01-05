@@ -78,7 +78,9 @@ const App = () => {
   };
 
   const handlePurchase = () => {
-    // Rastreamento Meta Pixel removido daqui
+    if (typeof (window as any).fbq === 'function') {
+      (window as any).fbq('track', 'InitiateCheckout');
+    }
     window.location.href = PURCHASE_LINK;
   };
 
@@ -530,5 +532,7 @@ const App = () => {
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
-  createRoot(rootElement).render(<App />);
+  createRoot(rootElement).render(
+    <App />
+  );
 }
