@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { 
@@ -67,6 +68,13 @@ const App = () => {
   const vimeoRef = useRef<HTMLDivElement>(null);
   const [isMuted, setIsMuted] = useState(true);
 
+  const scrollToOffer = () => {
+    const offerSection = document.getElementById('oferta');
+    if (offerSection) {
+      offerSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handlePurchase = () => {
     // Disparar evento InitiateCheckout do Facebook Pixel
     if (typeof (window as any).fbq === 'function') {
@@ -121,8 +129,8 @@ const App = () => {
           </div>
 
           <div className="w-full max-w-md mt-6">
-            <Button onClick={handlePurchase} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
-              Quero meu pequeno lendo rápido
+            <Button onClick={scrollToOffer} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
+              QUERO MEU PEQUENO LENDO RÁPIDO
             </Button>
             <p className="mt-4 text-gray-700 font-medium">
               Seu filho ou aluno vai aprender a ler até 5x mais rápido de forma divertida, simples e eficaz.
@@ -223,7 +231,7 @@ const App = () => {
               As atividades de grafismo fonético desenvolvem a consciência fonológica e visual, habilidades essenciais para que a criança reconheça sílabas, sons e estruturas das palavras de forma natural.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              Ao traçar linhas, curvas e padrões fonéticos, ela fortalece as conexões cerebrais responsáveis pela leitura, acelerando o processo de alfabetização de forma divertida e sem pressão.
+              Ao traçar lines, curvas e padrões fonéticos, ela fortalece as conexões cerebrais responsáveis pela leitura, acelerando o processo de alfabetização de forma divertida e sem pressão.
             </p>
           </div>
         </div>
@@ -257,7 +265,7 @@ const App = () => {
             <p className="text-xl font-bold text-green-700 mb-6">
               Comece a jornada de aprendizado do seu filho hoje.
             </p>
-            <Button onClick={handlePurchase} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
+            <Button onClick={scrollToOffer} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
               BAIXAR ATIVIDADES AGORA
             </Button>
           </Card>
@@ -335,7 +343,7 @@ const App = () => {
           </div>
 
           <div className="max-w-md mx-auto pt-8">
-            <Button onClick={handlePurchase} className="bg-[#4CAF50] hover:bg-[#388E3C] text-white">
+            <Button onClick={scrollToOffer} className="bg-[#4CAF50] hover:bg-[#388E3C] text-white">
               BAIXAR ATIVIDADES AGORA
             </Button>
           </div>
@@ -410,8 +418,8 @@ const App = () => {
               </div>
             </div>
           </div>
-          <Button onClick={handlePurchase} className="bg-[#4CAF50] hover:bg-[#388E3C] text-white max-w-md mx-auto">
-            baixar atividades agora
+          <Button onClick={scrollToOffer} className="bg-[#4CAF50] hover:bg-[#388E3C] text-white max-w-md mx-auto">
+            BAIXAR ATIVIDADES AGORA
           </Button>
         </div>
       </Section>
@@ -454,7 +462,7 @@ const App = () => {
         </Card>
         
         <div className="mt-12 max-w-md mx-auto">
-          <Button onClick={handlePurchase} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
+          <Button onClick={scrollToOffer} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
             BAIXAR ATIVIDADES AGORA
           </Button>
         </div>
@@ -504,7 +512,7 @@ const App = () => {
             {[
               { title: "Caderno Alfabeto com Imagem", desc: "Apresenta cada letra do alfabeto com imagens associadas, ajudando na familiarização das crianças com as letras de forma visual e divertida.", old: "37" },
               { title: "Caderno Quebra Cabeça Alfabeto", desc: "Atividades de quebra-cabeça com letras do alfabeto para fixação divertida e interativa.", old: "47" },
-              { title: "Caderno Formando Palavras", desc: "Exercícios de formação de palavras que incentivam leitura e escrita, ajudando as crianças a construir vocabulário.", old: "57" },
+              { title: "Caderno Formando Palavras", desc: "Exercícios de formation de palavras que incentivam leitura e escrita, ajudando as crianças a construir vocabulário.", old: "57" },
               { title: "Caderno Alfabeto com Relógio", desc: "Caderno interativo que ensina as letras do alfabeto junto a um relógio, promovendo a leitura e noções de tempo de forma lúdica.", old: "39" },
               { title: "Caderno Alfabeto Traçado", desc: "Caderno com letras do alfabeto traçadas, perfeito para que as crianças pratiquem a escrita.", old: "37" },
               { title: "Caderno Alfabeto com Carinhas", desc: "Caderno com letras do alfabeto e expressões divertidas para tornar o aprendizado mais alegre.", old: "37" }
@@ -524,7 +532,7 @@ const App = () => {
       </Section>
 
       {/* RECAP & PRICING */}
-      <Section className="bg-[#FFF3E0]">
+      <Section id="oferta" className="bg-[#FFF3E0]">
         <div className="text-center space-y-8">
           <h2 className="text-2xl md:text-3xl font-bold text-orange-900 leading-tight">
             Recapitulando tudo o que você vai receber junto com o<br/>
@@ -549,8 +557,8 @@ const App = () => {
             <p className="text-gray-500 line-through text-lg">No total tudo deveria custar R$ 453,00</p>
             <p className="text-xl font-bold">Mas hoje você vai ter acesso completo por</p>
             <div className="py-6 bg-white rounded-3xl shadow-xl border-4 border-orange-500 max-w-sm mx-auto">
-              <p className="text-5xl font-black text-orange-600 mb-2">R$ 37</p>
-              <p className="text-lg font-bold text-gray-700">5 x de R$ 8,19 *</p>
+              <p className="text-5xl font-black text-orange-600 mb-2">R$ 27,90</p>
+              <p className="text-lg font-bold text-gray-700">5 x de R$ 6,18 *</p>
             </div>
             <p className="text-xs font-bold text-gray-500 tracking-widest uppercase">ACESSO VITALÍCIO | ACESSO IMEDIATO</p>
           </div>
@@ -574,7 +582,7 @@ const App = () => {
         <div className="flex flex-col md:flex-row items-center gap-12 bg-gray-50 p-8 md:p-12 rounded-[3rem] border border-gray-200">
           <div className="md:w-1/3 flex justify-center shrink-0">
             <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/e/ea/7_days_guarantee_badge.png" 
+              src="https://i.imgur.com/6AdTyhO.png" 
               alt="Garantia 7 dias" 
               className="w-48 h-48 object-contain"
             />
