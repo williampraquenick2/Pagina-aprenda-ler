@@ -78,10 +78,6 @@ const App = () => {
   };
 
   const handlePurchase = () => {
-    // Dispara o evento de InitiateCheckout do Meta Pixel se disponível
-    if (typeof (window as any).fbq === 'function') {
-      (window as any).fbq('track', 'InitiateCheckout');
-    }
     window.location.href = PURCHASE_LINK;
   };
 
