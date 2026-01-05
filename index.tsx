@@ -468,36 +468,6 @@ const App = () => {
         </div>
       </Section>
 
-      {/* HOW TO START */}
-      <Section className="bg-[#F0F4F8]">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          Muito simples de começar a utilizar!
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center space-y-4">
-            <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto shadow-lg">
-              <Mail size={32} />
-            </div>
-            <h4 className="font-bold text-lg">CHEGA NO E-MAIL</h4>
-            <p className="text-sm text-gray-600">Após a compra você recebe no e-mail o acesso a plataforma com arquivos em formato PDF.</p>
-          </div>
-          <div className="text-center space-y-4">
-            <div className="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto shadow-lg">
-              <Printer size={32} />
-            </div>
-            <h4 className="font-bold text-lg">VOCÊ IMPRIME</h4>
-            <p className="text-sm text-gray-600">Você pode imprimir quando quiser, pois o acesso é VITALÍCIO e quantas vezes desejar.</p>
-          </div>
-          <div className="text-center space-y-4">
-            <div className="bg-red-500 w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto shadow-lg">
-              <Heart size={32} />
-            </div>
-            <h4 className="font-bold text-lg">OS PEQUENOS AMAM</h4>
-            <p className="text-sm text-gray-600">Temos uma ótima notícia pra você, MÃOS À OBRA! Importante que sempre auxilie seu pequeno nas atividades.</p>
-          </div>
-        </div>
-      </Section>
-
       {/* BONUS SECTION */}
       <Section className="bg-[#FFD600]">
         <div className="text-center space-y-8">
@@ -658,6 +628,36 @@ const App = () => {
             question="E se eu não gostar do material?" 
             answer="Não tem problema. Você tem 7 dias de garantia total. Basta solicitar o reembolso e devolvemos seu dinheiro." 
           />
+        </div>
+      </Section>
+
+      {/* HOW TO START */}
+      <Section className="bg-[#F0F4F8]">
+        <h2 className="text-3xl font-bold text-center mb-12">
+          Muito simples de começar a utilizar!
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="text-center space-y-4">
+            <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto shadow-lg">
+              <Mail size={32} />
+            </div>
+            <h4 className="font-bold text-lg">CHEGA NO E-MAIL</h4>
+            <p className="text-sm text-gray-600">Após a compra você recebe no e-mail o acesso a plataforma com arquivos em formato PDF.</p>
+          </div>
+          <div className="text-center space-y-4">
+            <div className="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto shadow-lg">
+              <Printer size={32} />
+            </div>
+            <h4 className="font-bold text-lg">VOCÊ IMPRIME</h4>
+            <p className="text-sm text-gray-600">Você pode imprimir quando quiser, pois o acesso é VITALÍCIO e quantas vezes desejar.</p>
+          </div>
+          <div className="text-center space-y-4">
+            <div className="bg-red-500 w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto shadow-lg">
+              <Heart size={32} />
+            </div>
+            <h4 className="font-bold text-lg">OS PEQUENOS AMAM</h4>
+            <p className="text-sm text-gray-600">Temos uma ótima notícia pra você, MÃOS À OBRA! Importante que sempre auxilie seu pequeno nas atividades.</p>
+          </div>
         </div>
       </Section>
 
