@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { 
@@ -79,9 +78,7 @@ const App = () => {
   };
 
   const handlePurchase = () => {
-    if (typeof (window as any).fbq === 'function') {
-      (window as any).fbq('track', 'InitiateCheckout');
-    }
+    // Rastreamento Meta Pixel removido daqui
     window.location.href = PURCHASE_LINK;
   };
 
