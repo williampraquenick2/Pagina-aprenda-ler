@@ -21,6 +21,7 @@ import {
 
 const PURCHASE_LINK = "https://pay.cakto.com.br/4xw4zrc_710728";
 
+// Added key to prop types to resolve TS errors when used in map()
 const Button = ({ children, className = "", onClick = () => {} }: { children?: React.ReactNode; className?: string; onClick?: () => void; key?: React.Key }) => (
   <button 
     onClick={onClick}
@@ -30,12 +31,14 @@ const Button = ({ children, className = "", onClick = () => {} }: { children?: R
   </button>
 );
 
+// Added key to prop types to resolve TS errors when used in map()
 const Card = ({ children, className = "" }: { children?: React.ReactNode; className?: string; key?: React.Key }) => (
   <div className={`bg-white rounded-3xl p-6 shadow-md border border-gray-100 ${className}`}>
     {children}
   </div>
 );
 
+// Added key to prop types to resolve TS errors when used in map()
 const Section = ({ children, className = "", id = "" }: { children?: React.ReactNode; className?: string; id?: string; key?: React.Key }) => (
   <section id={id} className={`py-12 px-5 md:px-20 ${className}`}>
     <div className="max-w-4xl mx-auto w-full">
@@ -44,7 +47,7 @@ const Section = ({ children, className = "", id = "" }: { children?: React.React
   </section>
 );
 
-const FAQItem = ({ question, answer }: { question: string; answer: string; key?: React.Key }) => {
+const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="border-b border-gray-200 py-4">
@@ -76,7 +79,6 @@ const App = () => {
   };
 
   const handlePurchase = () => {
-    // Disparar evento InitiateCheckout do Facebook Pixel
     if (typeof (window as any).fbq === 'function') {
       (window as any).fbq('track', 'InitiateCheckout');
     }
@@ -88,11 +90,9 @@ const App = () => {
     if (iframe && (window as any).Vimeo) {
       const player = new (window as any).Vimeo.Player(iframe);
       if (isMuted) {
-        player.setMuted(false);
-        setIsMuted(false);
+        player.setMuted(false).then(() => setIsMuted(false));
       } else {
-        player.setMuted(true);
-        setIsMuted(true);
+        player.setMuted(true).then(() => setIsMuted(true));
       }
     }
   };
@@ -231,7 +231,7 @@ const App = () => {
               As atividades de grafismo fonético desenvolvem a consciência fonológica e visual, habilidades essenciais para que a criança reconheça sílabas, sons e estruturas das palavras de forma natural.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              Ao traçar lines, curvas e padrões fonéticos, ela fortalece as conexões cerebrais responsáveis pela leitura, acelerando o processo de alfabetização de forma divertida e sem pressão.
+              Ao traçar linhas, curvas e padrões fonéticos, ela fortalece as conexões cerebrais responsáveis pela leitura, acelerando o processo de alfabetização de forma divertida e sem pressão.
             </p>
           </div>
         </div>
@@ -328,6 +328,14 @@ const App = () => {
               CLIQUE PARA ATIVAR O SOM
             </button>
             
+            <style>{`
+              .aspect-vimeo-shorts {
+                aspect-ratio: 9 / 16;
+                max-width: 320px;
+                margin: 0 auto;
+              }
+            `}</style>
+            
             <div 
               ref={vimeoRef}
               className="aspect-vimeo-shorts w-full overflow-hidden rounded-3xl shadow-2xl bg-black relative"
@@ -350,7 +358,7 @@ const App = () => {
         </div>
       </Section>
 
-      {/* TARGET AUDIENCE - 10 MIN PER DAY */}
+      {/* TARGET AUDIENCE */}
       <Section className="bg-[#F5F5F5]">
         <div className="text-center space-y-12">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 leading-tight">
@@ -362,22 +370,22 @@ const App = () => {
             <Card className="text-left border-l-8 border-blue-500">
               <div className="text-3xl font-black text-blue-100 mb-2">1</div>
               <h4 className="font-bold text-blue-800 mb-2">Crianças em fase de alfabetização</h4>
-              <p className="text-gray-600">Ideal para crianças que estão dando os primeiros passos na leitura, o método oferece uma abordagem estruturada e intuitiva, ajudando a desenvolver uma base sólida e segura.</p>
+              <p className="text-gray-600">Ideal para crianças que estão dando os primeiros passos na leitura, o método oferece uma abordagem estruturada e intuitiva.</p>
             </Card>
             <Card className="text-left border-l-8 border-green-500">
               <div className="text-3xl font-black text-green-100 mb-2">2</div>
-              <h4 className="font-bold text-green-800 mb-2">Pais e educadores que buscam alternativas aos métodos tradicionais</h4>
-              <p className="text-gray-600">Se você procura uma forma de ensino mais personalizada, que respeita o ritmo individual de cada criança, esse método é uma excelente escolha.</p>
+              <h4 className="font-bold text-green-800 mb-2">Pais e educadores</h4>
+              <p className="text-gray-600">Se você procura uma forma de ensino mais personalizada, que respeita o ritmo individual de cada criança.</p>
             </Card>
             <Card className="text-left border-l-8 border-orange-500">
               <div className="text-3xl font-black text-orange-100 mb-2">3</div>
-              <h4 className="font-bold text-orange-800 mb-2">Crianças com dificuldade de leitura</h4>
-              <p className="text-gray-600">Para crianças que enfrentam desafios na leitura e compreensão, o Método de Grafismo Fonético oferece um suporte extra com atividades lúdicas que facilitam o entendimento.</p>
+              <h4 className="font-bold text-orange-800 mb-2">Dificuldades de leitura</h4>
+              <p className="text-gray-600">Para crianças que enfrentam desafios na leitura, o Grafismo Fonético oferece um suporte lúdico extra.</p>
             </Card>
             <Card className="text-left border-l-8 border-purple-500">
               <div className="text-3xl font-black text-purple-100 mb-2">4</div>
-              <h4 className="font-bold text-purple-800 mb-2">Escolas e instituições que valorizam inovação no ensino</h4>
-              <p className="text-gray-600">Perfeito para escolas que buscam métodos comprovados, o grafismo fonético traz uma abordagem moderna que gera resultados reais e duraduros.</p>
+              <h4 className="font-bold text-purple-800 mb-2">Inovação no ensino</h4>
+              <p className="text-gray-600">Abordagem moderna que gera resultados reais e duradouros na consciência fonológica.</p>
             </Card>
           </div>
         </div>
@@ -387,7 +395,7 @@ const App = () => {
       <Section className="bg-[#FFF3E0]">
         <div className="text-center space-y-8">
           <h2 className="text-2xl md:text-3xl font-bold text-orange-900">
-            Veja o que Pais e educadores dizem sobre o Kit de Grafismo Fonético
+            Veja o que Pais e educadores dizem sobre o Kit
           </h2>
           <div className="bg-white p-4 rounded-3xl shadow-xl">
             <img 
@@ -400,20 +408,7 @@ const App = () => {
                 <div className="w-12 h-12 bg-blue-500 rounded-full shrink-0 flex items-center justify-center text-white font-bold">M</div>
                 <div className="text-left">
                   <p className="font-bold text-blue-600">Mariana Silva</p>
-                  <p className="text-gray-700">Gente, esse material é divino! Meu filho de 5 anos não queria nem ver letras, agora ele pede pra fazer as atividades todo dia. ❤️</p>
-                  <div className="flex gap-4 mt-2 text-xs text-gray-500">
-                    <span>Curtir</span> • <span>Responder</span> • <span>12 min</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100">
-                <div className="w-12 h-12 bg-pink-500 rounded-full shrink-0 flex items-center justify-center text-white font-bold">A</div>
-                <div className="text-left">
-                  <p className="font-bold text-blue-600">Ana Paula Educadora</p>
-                  <p className="text-gray-700">Apliquei em sala com meus alunos com TDAH e os resultados foram surpreendentes. A fixação do som é muito mais rápida.</p>
-                  <div className="flex gap-4 mt-2 text-xs text-gray-500">
-                    <span>Curtir</span> • <span>Responder</span> • <span>1h</span>
-                  </div>
+                  <p className="text-gray-700">Meu filho de 5 anos não queria nem ver letras, agora ele pede pra fazer as atividades todo dia. ❤️</p>
                 </div>
               </div>
             </div>
@@ -427,7 +422,7 @@ const App = () => {
       {/* WHAT'S INSIDE */}
       <Section className="bg-white overflow-hidden">
         <h2 className="text-3xl font-bold text-center mb-12">
-          Veja tudo que você vai receber no kit de atividades
+          Veja tudo que você vai receber no kit
         </h2>
         
         <div className="relative mb-12 overflow-hidden">
@@ -435,10 +430,8 @@ const App = () => {
              <img src="https://i.imgur.com/h7j0KIh.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
              <img src="https://i.imgur.com/YywQAQu.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
              <img src="https://i.imgur.com/f1Nmr0Y.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
-             {/* Duplicate for infinite loop effect */}
              <img src="https://i.imgur.com/h7j0KIh.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
              <img src="https://i.imgur.com/YywQAQu.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
-             <img src="https://i.imgur.com/f1Nmr0Y.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
           </div>
         </div>
 
@@ -460,12 +453,6 @@ const App = () => {
             ))}
           </div>
         </Card>
-        
-        <div className="mt-12 max-w-md mx-auto">
-          <Button onClick={scrollToOffer} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
-            BAIXAR ATIVIDADES AGORA
-          </Button>
-        </div>
       </Section>
 
       {/* BONUS SECTION */}
@@ -475,21 +462,21 @@ const App = () => {
             e ainda não acabou...
           </h2>
           <p className="text-xl font-bold text-gray-800">
-            Garantindo seu acesso hoje você leva 6 SUPER BÔNUS 🎁
+            Garantindo hoje você leva 6 SUPER BÔNUS 🎁
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Caderno Alfabeto com Imagem", desc: "Apresenta cada letra do alfabeto com imagens associadas, ajudando na familiarização das crianças com as letras de forma visual e divertida.", old: "37" },
-              { title: "Caderno Quebra Cabeça Alfabeto", desc: "Atividades de quebra-cabeça com letras do alfabeto para fixação divertida e interativa.", old: "47" },
-              { title: "Caderno Formando Palavras", desc: "Exercícios de formation de palavras que incentivam leitura e escrita, ajudando as crianças a construir vocabulário.", old: "57" },
-              { title: "Caderno Alfabeto com Relógio", desc: "Caderno interativo que ensina as letras do alfabeto junto a um relógio, promovendo a leitura e noções de tempo de forma lúdica.", old: "39" },
-              { title: "Caderno Alfabeto Traçado", desc: "Caderno com letras do alfabeto traçadas, perfeito para que as crianças pratiquem a escrita.", old: "37" },
-              { title: "Caderno Alfabeto com Carinhas", desc: "Caderno com letras do alfabeto e expressões divertidas para tornar o aprendizado mais alegre.", old: "37" }
+              { title: "Alfabeto com Imagem", desc: "Associação visual direta entre letras e objetos.", old: "37" },
+              { title: "Quebra Cabeça Alfabeto", desc: "Fixação lúdica e interativa.", old: "47" },
+              { title: "Formando Palavras", desc: "Construção de vocabulário básico.", old: "57" },
+              { title: "Alfabeto com Relógio", desc: "Noções de tempo e letras juntas.", old: "39" },
+              { title: "Alfabeto Traçado", desc: "Prática intensiva de escrita.", old: "37" },
+              { title: "Alfabeto com Carinhas", desc: "Aprendizado alegre e divertido.", old: "37" }
             ].map((bonus, i) => (
-              <Card key={i} className="flex flex-col h-full bg-white relative overflow-hidden group">
-                <div className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold py-1 px-3 rounded-bl-xl uppercase tracking-wider">Bônus {i+1}</div>
-                <h4 className="font-bold text-gray-800 mb-3 pr-12">{bonus.title}</h4>
+              <Card key={i} className="flex flex-col h-full bg-white relative">
+                <div className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold py-1 px-3 rounded-bl-xl">BÔNUS</div>
+                <h4 className="font-bold text-gray-800 mb-3">{bonus.title}</h4>
                 <p className="text-xs text-gray-600 flex-grow mb-4">{bonus.desc}</p>
                 <div className="pt-4 border-t border-gray-100">
                   <p className="text-xs text-gray-400 line-through">De R$ {bonus.old}</p>
@@ -505,32 +492,26 @@ const App = () => {
       <Section id="oferta" className="bg-[#FFF3E0]">
         <div className="text-center space-y-8">
           <h2 className="text-2xl md:text-3xl font-bold text-orange-900 leading-tight">
-            Recapitulando tudo o que você vai receber junto com o<br/>
-            Kit Atividades Grafismo Fonético
+            Recapitulando tudo o que você vai receber
           </h2>
           
           <div className="max-w-xl mx-auto text-left bg-white/50 p-6 rounded-3xl border border-orange-200">
             <ul className="space-y-2 text-sm md:text-base">
-              <li className="flex justify-between"><span>Atividades Grafismo Fonético Nível 1, 2 e 3</span> <span className="text-gray-400 line-through">De R$197</span></li>
-              <li className="flex justify-between"><span>Bônus 01: Caderno Alfabeto com Imagem</span> <span className="text-gray-400 line-through">De R$37</span></li>
-              <li className="flex justify-between"><span>Bônus 02: Caderno Quebra-Cabeça Alfabeto</span> <span className="text-gray-400 line-through">De R$47</span></li>
-              <li className="flex justify-between"><span>Bônus 03: Caderno Formando Palavras</span> <span className="text-gray-400 line-through">De R$57</span></li>
-              <li className="flex justify-between"><span>Bônus 04: Caderno Alfabeto com Relógio</span> <span className="text-gray-400 line-through">De R$39</span></li>
-              <li className="flex justify-between"><span>Bônus 05: Caderno Alfabeto Traçado</span> <span className="text-gray-400 line-through">De R$27</span></li>
-              <li className="flex justify-between"><span>Bônus 06: Caderno Alfabeto com Carinhas</span> <span className="text-gray-400 line-through">De R$49</span></li>
+              <li className="flex justify-between"><span>Atividades Grafismo Fonético</span> <span className="text-gray-400 line-through">De R$197</span></li>
+              <li className="flex justify-between"><span>6 Cadernos de Bônus Exclusivos</span> <span className="text-gray-400 line-through">De R$256</span></li>
               <li className="flex items-center gap-2 text-green-600 font-bold"><CheckCircle size={16}/> Suporte Profissional</li>
               <li className="flex items-center gap-2 text-green-600 font-bold"><CheckCircle size={16}/> Garantia Incondicional</li>
             </ul>
           </div>
 
           <div className="space-y-4">
-            <p className="text-gray-500 line-through text-lg">No total tudo deveria custar R$ 453,00</p>
-            <p className="text-xl font-bold">Mas hoje você vai ter acesso completo por</p>
+            <p className="text-gray-500 line-through text-lg">No total: R$ 453,00</p>
+            <p className="text-xl font-bold">Mas hoje você terá acesso completo por</p>
             <div className="py-6 bg-white rounded-3xl shadow-xl border-4 border-orange-500 max-w-sm mx-auto">
-              <p className="text-5xl font-black text-orange-600 mb-2">R$ 27,90</p>
+              <p className="text-6xl font-black text-orange-600 mb-2">R$ 27,90</p>
               <p className="text-lg font-bold text-gray-700">5 x de R$ 6,18 *</p>
             </div>
-            <p className="text-xs font-bold text-gray-500 tracking-widest uppercase">ACESSO VITALÍCIO | ACESSO IMEDIATO</p>
+            <p className="text-xs font-bold text-gray-500 tracking-widest uppercase">ACESSO VITALÍCIO | ENVIO IMEDIATO</p>
           </div>
 
           <div className="max-w-md mx-auto">
@@ -539,10 +520,9 @@ const App = () => {
             </Button>
           </div>
 
-          <div className="flex justify-center gap-4 text-[10px] font-bold text-gray-400 uppercase tracking-tighter">
+          <div className="flex justify-center gap-4 text-[10px] font-bold text-gray-400 uppercase">
             <div className="flex items-center gap-1"><ShieldCheck size={14}/> Compra SEGURA</div>
             <div className="flex items-center gap-1"><ShieldCheck size={14}/> Satisfação GARANTIDA</div>
-            <div className="flex items-center gap-1"><ShieldCheck size={14}/> Privacidade PROTEGIDA</div>
           </div>
         </div>
       </Section>
@@ -560,42 +540,27 @@ const App = () => {
           <div className="md:w-2/3 space-y-4">
             <h3 className="text-2xl font-bold text-gray-800">Garantia incondicional de 7 dias</h3>
             <p className="text-gray-600 leading-relaxed">
-              Você tem 7 dias para testar o Kit de Grafismo Fonético. Se por qualquer motivo você não ficar satisfeito(a), basta enviar um e-mail que devolveremos 100% do seu dinheiro, sem burocracia e sem perguntas.
+              Você tem 7 dias para testar o Kit. Se por qualquer motivo não ficar satisfeito(a), devolvemos 100% do seu dinheiro, sem burocracia.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 text-center">
-          <div className="p-6">
-            <div className="text-blue-600 font-bold mb-2">Pagamento 100% Seguro</div>
-            <p className="text-xs text-gray-500">Processado pela Hotmart, líder em produtos digitais no Brasil. Seus dados estão protegidos.</p>
-          </div>
-          <div className="p-6">
-            <div className="text-blue-600 font-bold mb-2">Produto Registrado na CBL</div>
-            <p className="text-xs text-gray-500">Obra registrada na Câmara Brasileira do Livro com direito autoral protegido pela Lei nº 9.610/1998.</p>
-          </div>
-          <div className="p-6">
-            <div className="text-blue-600 font-bold mb-2">Suporte Humanizado</div>
-            <p className="text-xs text-gray-500">Equipe pronta para tirar todas as suas dúvidas via e-mail ou WhatsApp.</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 border-t pt-12">
-          <div className="text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 border-t pt-12 text-center">
+          <div>
             <div className="text-2xl font-black text-blue-600">+5.000</div>
-            <div className="text-xs font-bold text-gray-400 uppercase">Famílias atendidas</div>
+            <div className="text-[10px] font-bold text-gray-400 uppercase">Famílias atendidas</div>
           </div>
-          <div className="text-center">
+          <div>
             <div className="text-2xl font-black text-blue-600">Vitalício</div>
-            <div className="text-xs font-bold text-gray-400 uppercase">Sem mensalidades</div>
+            <div className="text-[10px] font-bold text-gray-400 uppercase">Sem mensalidades</div>
           </div>
-          <div className="text-center">
+          <div>
             <div className="text-2xl font-black text-blue-600">Suporte</div>
-            <div className="text-xs font-bold text-gray-400 uppercase">Humanizado</div>
+            <div className="text-[10px] font-bold text-gray-400 uppercase">Humanizado</div>
           </div>
-          <div className="text-center">
+          <div>
             <div className="text-2xl font-black text-blue-600">Digital</div>
-            <div className="text-xs font-bold text-gray-400 uppercase">Acesso imediato</div>
+            <div className="text-[10px] font-bold text-gray-400 uppercase">Acesso imediato</div>
           </div>
         </div>
       </Section>
@@ -606,32 +571,20 @@ const App = () => {
         <div className="max-w-2xl mx-auto space-y-2">
           <FAQItem 
             question="Para qual faixa etária é indicado?" 
-            answer="O material foi desenvolvido para crianças de 2 a 12 anos, respeitando o nível de desenvolvimento de cada uma." 
+            answer="Para crianças de 2 a 12 anos, respeitando o nível de desenvolvimento de cada uma." 
           />
           <FAQItem 
             question="Funciona para crianças com TDAH ou Autismo?" 
-            answer="Sim! O método fonético é altamente recomendado por especialistas para crianças com dificuldades de foco, TDAH ou Autismo, pois utiliza estímulos sensoriais e visuais diretos." 
+            answer="Sim! O método fonético utiliza estímulos sensoriais diretos que facilitam o foco e a fixação do som." 
           />
           <FAQItem 
             question="Como recebo o material?" 
-            answer="Imediatamente após a confirmação do pagamento, você receberá um link de acesso no seu e-mail cadastrado." 
-          />
-          <FAQItem 
-            question="Posso imprimir quantas vezes quiser?" 
-            answer="Sim! O acesso é vitalício. Você pode baixar e imprimir o PDF quantas vezes desejar para praticar com seu filho." 
-          />
-          <FAQItem 
-            question="Quanto tempo leva para ver resultados?" 
-            answer="Muitos pais relatam melhoras significativas no reconhecimento de sons e sílabas nos primeiros 15 dias de prática constante (10 min/dia)." 
-          />
-          <FAQItem 
-            question="E se eu não gostar do material?" 
-            answer="Não tem problema. Você tem 7 dias de garantia total. Basta solicitar o reembolso e devolvemos seu dinheiro." 
+            answer="Imediatamente após a confirmação do pagamento, no seu e-mail cadastrado." 
           />
         </div>
       </Section>
 
-      {/* HOW TO START */}
+      {/* HOW TO START - MOVIDO PARA O FINAL */}
       <Section className="bg-[#F0F4F8]">
         <h2 className="text-3xl font-bold text-center mb-12">
           Muito simples de começar a utilizar!
@@ -642,21 +595,21 @@ const App = () => {
               <Mail size={32} />
             </div>
             <h4 className="font-bold text-lg">CHEGA NO E-MAIL</h4>
-            <p className="text-sm text-gray-600">Após a compra você recebe no e-mail o acesso a plataforma com arquivos em formato PDF.</p>
+            <p className="text-sm text-gray-600">Receba no e-mail o acesso a plataforma com arquivos em formato PDF.</p>
           </div>
           <div className="text-center space-y-4">
             <div className="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto shadow-lg">
               <Printer size={32} />
             </div>
             <h4 className="font-bold text-lg">VOCÊ IMPRIME</h4>
-            <p className="text-sm text-gray-600">Você pode imprimir quando quiser, pois o acesso é VITALÍCIO e quantas vezes desejar.</p>
+            <p className="text-sm text-gray-600">Imprima quando e quantas vezes quiser, o acesso é VITALÍCIO.</p>
           </div>
           <div className="text-center space-y-4">
             <div className="bg-red-500 w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto shadow-lg">
               <Heart size={32} />
             </div>
             <h4 className="font-bold text-lg">OS PEQUENOS AMAM</h4>
-            <p className="text-sm text-gray-600">Temos uma ótima notícia pra você, MÃOS À OBRA! Importante que sempre auxilie seu pequeno nas atividades.</p>
+            <p className="text-sm text-gray-600">Transforme o aprendizado em um momento de diversão em família!</p>
           </div>
         </div>
       </Section>
@@ -666,11 +619,6 @@ const App = () => {
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h3 className="text-xl font-bold text-blue-600">Educação Kids</h3>
           <p className="text-sm text-gray-400">© 2026 - Todos os direitos reservados</p>
-          <div className="flex justify-center gap-4">
-             <div className="flex items-center gap-1 text-[10px] text-gray-400 border border-gray-200 px-3 py-1 rounded-md">
-               <ShieldCheck size={12}/> SITE BLINDADO
-             </div>
-          </div>
           <p className="text-[10px] text-gray-300 max-w-lg mx-auto leading-tight">
             Este site não faz parte do Facebook ou Google. Além disso, este site NÃO é endossado pelo Facebook ou Google de nenhuma maneira. FACEBOOK e GOOGLE são marcas comerciais de suas respectivas empresas.
           </p>
