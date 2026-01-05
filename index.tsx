@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { 
@@ -21,7 +20,6 @@ import {
 
 const PURCHASE_LINK = "https://pay.cakto.com.br/4xw4zrc_710728";
 
-// Added key to the type definition to allow its use in lists
 const Button = ({ children, className = "", onClick = () => {} }: { children?: React.ReactNode; className?: string; onClick?: () => void; key?: React.Key }) => (
   <button 
     onClick={onClick}
@@ -31,14 +29,12 @@ const Button = ({ children, className = "", onClick = () => {} }: { children?: R
   </button>
 );
 
-// Added key to the type definition to allow its use in lists
 const Card = ({ children, className = "" }: { children?: React.ReactNode; className?: string; key?: React.Key }) => (
   <div className={`bg-white rounded-3xl p-6 shadow-md border border-gray-100 ${className}`}>
     {children}
   </div>
 );
 
-// Added key to the type definition to allow its use in lists
 const Section = ({ children, className = "", id = "" }: { children?: React.ReactNode; className?: string; id?: string; key?: React.Key }) => (
   <section id={id} className={`py-12 px-5 md:px-20 ${className}`}>
     <div className="max-w-4xl mx-auto w-full">
@@ -47,7 +43,6 @@ const Section = ({ children, className = "", id = "" }: { children?: React.React
   </section>
 );
 
-// Added key to the type definition to allow its use in lists
 const FAQItem = ({ question, answer }: { question: string; answer: string; key?: React.Key }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -73,6 +68,10 @@ const App = () => {
   const [isMuted, setIsMuted] = useState(true);
 
   const handlePurchase = () => {
+    // Disparar evento InitiateCheckout do Facebook Pixel
+    if (typeof (window as any).fbq === 'function') {
+      (window as any).fbq('track', 'InitiateCheckout');
+    }
     window.location.href = PURCHASE_LINK;
   };
 
@@ -239,7 +238,7 @@ const App = () => {
           </h2>
           <div className="grid grid-cols-1 gap-4 text-left max-w-lg mx-auto">
             {[
-              "Vai reconhecer sílabas e sons with mais facilidade",
+              "Vai reconhecer sílabas e sons com mais facilidade",
               "Vai se sentir mais confiante ao tentar ler palavras novas",
               "Vai mostrar mais interesse por livros e história",
               "Vai aprender no ritmo dele, sem frustração ou comparação",
@@ -503,12 +502,12 @@ const App = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Caderno Alfabeto com Imagem", desc: "Apresenta cada letra do alfabeto with imagens associadas, ajudando na familiarização das crianças com as letras de forma visual e divertida.", old: "37" },
+              { title: "Caderno Alfabeto com Imagem", desc: "Apresenta cada letra do alfabeto com imagens associadas, ajudando na familiarização das crianças com as letras de forma visual e divertida.", old: "37" },
               { title: "Caderno Quebra Cabeça Alfabeto", desc: "Atividades de quebra-cabeça com letras do alfabeto para fixação divertida e interativa.", old: "47" },
               { title: "Caderno Formando Palavras", desc: "Exercícios de formação de palavras que incentivam leitura e escrita, ajudando as crianças a construir vocabulário.", old: "57" },
               { title: "Caderno Alfabeto com Relógio", desc: "Caderno interativo que ensina as letras do alfabeto junto a um relógio, promovendo a leitura e noções de tempo de forma lúdica.", old: "39" },
               { title: "Caderno Alfabeto Traçado", desc: "Caderno com letras do alfabeto traçadas, perfeito para que as crianças pratiquem a escrita.", old: "37" },
-              { title: "Caderno Alfabeto with Carinhas", desc: "Caderno com letras do alfabeto e expressões divertidas para tornar o aprendizado mais alegre.", old: "37" }
+              { title: "Caderno Alfabeto com Carinhas", desc: "Caderno com letras do alfabeto e expressões divertidas para tornar o aprendizado mais alegre.", old: "37" }
             ].map((bonus, i) => (
               <Card key={i} className="flex flex-col h-full bg-white relative overflow-hidden group">
                 <div className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold py-1 px-3 rounded-bl-xl uppercase tracking-wider">Bônus {i+1}</div>
