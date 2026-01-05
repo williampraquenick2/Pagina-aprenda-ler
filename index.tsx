@@ -19,6 +19,8 @@ import {
   Target
 } from 'lucide-react';
 
+const PURCHASE_LINK = "https://pay.cakto.com.br/4xw4zrc_710728";
+
 // Added key to the type definition to allow its use in lists
 const Button = ({ children, className = "", onClick = () => {} }: { children?: React.ReactNode; className?: string; onClick?: () => void; key?: React.Key }) => (
   <button 
@@ -70,6 +72,10 @@ const App = () => {
   const vimeoRef = useRef<HTMLDivElement>(null);
   const [isMuted, setIsMuted] = useState(true);
 
+  const handlePurchase = () => {
+    window.location.href = PURCHASE_LINK;
+  };
+
   const toggleMute = () => {
     const iframe = vimeoRef.current?.querySelector('iframe');
     if (iframe && (window as any).Vimeo) {
@@ -116,7 +122,7 @@ const App = () => {
           </div>
 
           <div className="w-full max-w-md mt-6">
-            <Button className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
+            <Button onClick={handlePurchase} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
               Quero meu pequeno lendo rápido
             </Button>
             <p className="mt-4 text-gray-700 font-medium">
@@ -233,7 +239,7 @@ const App = () => {
           </h2>
           <div className="grid grid-cols-1 gap-4 text-left max-w-lg mx-auto">
             {[
-              "Vai reconhecer sílabas e sons com mais facilidade",
+              "Vai reconhecer sílabas e sons with mais facilidade",
               "Vai se sentir mais confiante ao tentar ler palavras novas",
               "Vai mostrar mais interesse por livros e história",
               "Vai aprender no ritmo dele, sem frustração ou comparação",
@@ -252,7 +258,7 @@ const App = () => {
             <p className="text-xl font-bold text-green-700 mb-6">
               Comece a jornada de aprendizado do seu filho hoje.
             </p>
-            <Button className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
+            <Button onClick={handlePurchase} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
               BAIXAR ATIVIDADES AGORA
             </Button>
           </Card>
@@ -330,7 +336,7 @@ const App = () => {
           </div>
 
           <div className="max-w-md mx-auto pt-8">
-            <Button className="bg-[#4CAF50] hover:bg-[#388E3C] text-white">
+            <Button onClick={handlePurchase} className="bg-[#4CAF50] hover:bg-[#388E3C] text-white">
               baixar atividades agora
             </Button>
           </div>
@@ -405,7 +411,7 @@ const App = () => {
               </div>
             </div>
           </div>
-          <Button className="bg-[#4CAF50] hover:bg-[#388E3C] text-white max-w-md mx-auto">
+          <Button onClick={handlePurchase} className="bg-[#4CAF50] hover:bg-[#388E3C] text-white max-w-md mx-auto">
             baixar atividades agora
           </Button>
         </div>
@@ -449,7 +455,7 @@ const App = () => {
         </Card>
         
         <div className="mt-12 max-w-md mx-auto">
-          <Button className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
+          <Button onClick={handlePurchase} className="bg-[#FF9800] hover:bg-[#F57C00] text-white">
             BAIXAR ATIVIDADES AGORA
           </Button>
         </div>
@@ -551,7 +557,7 @@ const App = () => {
           </div>
 
           <div className="max-w-md mx-auto">
-            <Button className="bg-[#E64A19] hover:bg-[#D84315] text-white py-6 shadow-2xl">
+            <Button onClick={handlePurchase} className="bg-[#E64A19] hover:bg-[#D84315] text-white py-6 shadow-2xl">
               BAIXAR ATIVIDADES AGORA
             </Button>
           </div>
