@@ -336,7 +336,7 @@ const App = () => {
 
           <div className="max-w-md mx-auto pt-8">
             <Button onClick={handlePurchase} className="bg-[#4CAF50] hover:bg-[#388E3C] text-white">
-              baixar atividades agora
+              BAIXAR ATIVIDADES AGORA
             </Button>
           </div>
         </div>
