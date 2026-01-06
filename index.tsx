@@ -20,7 +20,6 @@ import {
 
 const PURCHASE_LINK = "https://pay.cakto.com.br/4xw4zrc_710728";
 
-// Added optional key to type definition to fix TS error when component is used in a map
 const Button = ({ children, className = "", onClick = () => {} }: { children?: React.ReactNode; className?: string; onClick?: () => void; key?: React.Key }) => (
   <button 
     onClick={onClick}
@@ -30,14 +29,12 @@ const Button = ({ children, className = "", onClick = () => {} }: { children?: R
   </button>
 );
 
-// Added optional key to type definition to fix TS error when component is used in a map
 const Card = ({ children, className = "" }: { children?: React.ReactNode; className?: string; key?: React.Key }) => (
   <div className={`bg-white rounded-3xl p-6 shadow-md border border-gray-100 ${className}`}>
     {children}
   </div>
 );
 
-// Added optional key to type definition to fix TS error when component is used in a map
 const Section = ({ children, className = "", id = "" }: { children?: React.ReactNode; className?: string; id?: string; key?: React.Key }) => (
   <section id={id} className={`py-12 px-5 md:px-20 ${className}`}>
     <div className="max-w-4xl mx-auto w-full">
@@ -518,9 +515,6 @@ const App = () => {
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h3 className="text-xl font-bold text-blue-600">Educação Kids</h3>
           <p className="text-sm text-gray-400">© 2026 - Todos os direitos reservados</p>
-          <p className="text-[10px] text-gray-300 max-w-lg mx-auto leading-tight">
-            Este site não faz parte do Facebook ou Google. Além disso, este site NÃO é endossado pelo Facebook ou Google de nenhuma maneira. FACEBOOK e GOOGLE são marcas comerciais de suas respectivas empresas.
-          </p>
         </div>
       </footer>
     </div>
