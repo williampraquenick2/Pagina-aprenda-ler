@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { 
@@ -20,28 +21,35 @@ import {
 
 const PURCHASE_LINK = "https://pay.cakto.com.br/4xw4zrc_710728";
 
-const Button = ({ children, className = "", onClick = () => {} }: { children?: React.ReactNode; className?: string; onClick?: () => void; key?: React.Key }) => (
-  <button 
-    onClick={onClick}
-    className={`w-full py-4 px-6 rounded-2xl font-bold text-lg transition-all active:scale-95 shadow-lg flex items-center justify-center gap-2 ${className}`}
-  >
-    {children}
-  </button>
-);
+// Cleaned up component definitions to avoid potential parser issues with key prop and implicit returns
+const Button = ({ children, className = "", onClick = () => {} }: { children?: React.ReactNode; className?: string; onClick?: () => void }) => {
+  return (
+    <button 
+      onClick={onClick}
+      className={`w-full py-4 px-6 rounded-2xl font-bold text-lg transition-all active:scale-95 shadow-lg flex items-center justify-center gap-2 ${className}`}
+    >
+      {children}
+    </button>
+  );
+};
 
-const Card = ({ children, className = "" }: { children?: React.ReactNode; className?: string; key?: React.Key }) => (
-  <div className={`bg-white rounded-3xl p-6 shadow-md border border-gray-100 ${className}`}>
-    {children}
-  </div>
-);
-
-const Section = ({ children, className = "", id = "" }: { children?: React.ReactNode; className?: string; id?: string; key?: React.Key }) => (
-  <section id={id} className={`py-12 px-5 md:px-20 ${className}`}>
-    <div className="max-w-4xl mx-auto w-full">
+const Card = ({ children, className = "" }: { children?: React.ReactNode; className?: string }) => {
+  return (
+    <div className={`bg-white rounded-3xl p-6 shadow-md border border-gray-100 ${className}`}>
       {children}
     </div>
-  </section>
-);
+  );
+};
+
+const Section = ({ children, className = "", id = "" }: { children?: React.ReactNode; className?: string; id?: string }) => {
+  return (
+    <section id={id} className={`py-12 px-5 md:px-20 ${className}`}>
+      <div className="max-w-4xl mx-auto w-full">
+        {children}
+      </div>
+    </section>
+  );
+};
 
 const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -80,12 +88,13 @@ const App = () => {
 
   const toggleMute = () => {
     const iframe = vimeoRef.current?.querySelector('iframe');
+    // Ensure iframe exists and Vimeo library is loaded before creating player
     if (iframe && (window as any).Vimeo) {
       const player = new (window as any).Vimeo.Player(iframe);
       if (isMuted) {
-        player.setMuted(false).then(() => setIsMuted(false));
+        player.setMuted(false).then(() => setIsMuted(false)).catch(console.error);
       } else {
-        player.setMuted(true).then(() => setIsMuted(true));
+        player.setMuted(true).then(() => setIsMuted(true)).catch(console.error);
       }
     }
   };
@@ -352,11 +361,11 @@ const App = () => {
         
         <div className="relative mb-12 overflow-hidden">
           <div className="animate-scroll">
-             <img src="https://i.imgur.com/h7j0KIh.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
-             <img src="https://i.imgur.com/YywQAQu.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
-             <img src="https://i.imgur.com/f1Nmr0Y.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
-             <img src="https://i.imgur.com/h7j0KIh.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
-             <img src="https://i.imgur.com/YywQAQu.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" />
+             <img src="https://i.imgur.com/h7j0KIh.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" alt="Atividade 1" />
+             <img src="https://i.imgur.com/YywQAQu.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" alt="Atividade 2" />
+             <img src="https://i.imgur.com/f1Nmr0Y.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" alt="Atividade 3" />
+             <img src="https://i.imgur.com/h7j0KIh.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" alt="Atividade 4" />
+             <img src="https://i.imgur.com/YywQAQu.png" className="h-48 md:h-64 inline-block mr-4 rounded-xl shadow-md" alt="Atividade 5" />
           </div>
         </div>
 
